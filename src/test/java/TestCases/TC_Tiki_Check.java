@@ -34,7 +34,7 @@ public class TC_Tiki_Check {
         switch (browser)
         {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\drivers\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\DriverChrome\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-notifications"); //vô hiệu hóa thông báo chrome
                 driver = new ChromeDriver(options);
@@ -84,7 +84,7 @@ public class TC_Tiki_Check {
 
     @When("^Enter all valid data in all field of Login form\\.$")
     public void enter_all_valid_data_in_all_field_of_Login_form() throws Throwable {
-       // Thread.sleep(2000);
+        Thread.sleep(2000);
         TikiLoginAction.enterEmailAndPassword(driver,user.getProperty("userid"),user.getProperty("password"));
     }
 
@@ -108,8 +108,8 @@ public class TC_Tiki_Check {
     public void click_on_a_product() throws Throwable {
         Thread.sleep(2000);
         TikiAddToCartAction.clickProduct(driver);
-        ArrayList<String> tags = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tags.get(1));
+//        ArrayList<String> tags = new ArrayList<String>(driver.getWindowHandles());
+//        driver.switchTo().window(tags.get(1));
     }
     @When("^Click on \"(.*?)\" button of product\\.$")
     public void click_on_button_of_product(String arg1) throws Throwable {
