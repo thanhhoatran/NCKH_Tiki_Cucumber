@@ -1,9 +1,6 @@
 package TestCases;
 
-import Actions.TikiAddToCartAction;
-import Actions.TikiLoginAction;
-import Actions.TikiLogoutAction;
-import Actions.TikiSearchAction;
+import Actions.*;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -34,7 +31,7 @@ public class TC_Tiki_Check {
         switch (browser)
         {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\DriverChrome\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\drivers\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-notifications"); //vô hiệu hóa thông báo chrome
                 driver = new ChromeDriver(options);
@@ -90,7 +87,7 @@ public class TC_Tiki_Check {
 
     @When("^Click on \"(.*?)\" button\\.$")
     public void click_on_button(String arg1) throws Throwable {
-
+        Thread.sleep(2000);
         TikiLoginAction.clickOnLoginButton(driver);
     }
 
@@ -106,7 +103,7 @@ public class TC_Tiki_Check {
     }
     @When("^Click on a product\\.$")
     public void click_on_a_product() throws Throwable {
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         TikiAddToCartAction.clickProduct(driver);
 //        ArrayList<String> tags = new ArrayList<String>(driver.getWindowHandles());
 //        driver.switchTo().window(tags.get(1));
@@ -127,6 +124,7 @@ public class TC_Tiki_Check {
         Thread.sleep(2000);
         TikiLoginAction.clickOnDangNhap1(driver);
         TikiLoginAction.clickOnDangNhap2(driver);
+        Thread.sleep(2000);
         TikiLoginAction.enterEmailAndPassword(driver,user.getProperty("userid"),user.getProperty("password"));
         TikiLoginAction.clickOnLoginButton(driver);
     }
@@ -146,7 +144,7 @@ public class TC_Tiki_Check {
     @Then("^The products of cart still displayed\\.$")
     public void the_products_of_cart_still_displayed() throws Throwable {
         Thread.sleep(2000);
-        String LogoutCheckXpath = "//a[@href=\"https://tiki.vn/laptop-masstel-l133-pro-silver-p5829707.html?src=cart-page&spid=5829709\"]";
+        String LogoutCheckXpath = "//a[@href=\"https://tiki.vn/laptop-dell-latitude-5490-42lt540012-p12341341.html?src=cart-page&spid=14921472\"]";
         boolean isLogoutCheck = driver.findElement(By.xpath(LogoutCheckXpath)).isDisplayed();
         Assert.assertEquals(true, isLogoutCheck);
     }
@@ -156,4 +154,10 @@ public class TC_Tiki_Check {
         TikiAddToCartAction.clickDeleteProduct(driver);
     }
 
+    //
+    @When("^Click on \"(.*?)\" button of menu\\.$")
+    public void click_on_button_of_menu(String arg1) throws Throwable {
+        Thread.sleep(2000);
+        TikiFollowAction.clickOnTheoDoi(driver);
+    }
 }
